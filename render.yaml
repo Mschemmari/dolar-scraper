@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: websocket-app
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/index.js
+    routes:
+      - type: wildcard
+        url: /data-update

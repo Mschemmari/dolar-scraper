@@ -72,9 +72,9 @@ const scrapeData = async () => {
         actualizado: new Date().toISOString()
       };
     })
-    console.log(scrapedDataContainer([...data1, ...data2]));
+    // console.log(scrapedDataContainer([...data1, ...data2]));
     // Emit the updated data to all connected clients via WebSocket
-    io.emit('data-update', scrapedDataContainer([...data1, ...data2]));
+    io.emit('data-update', scrapedDataContainer(...data1, ...data2));
   }  catch (error) {
     console.error('Error scraping data:', error);
   }
@@ -88,7 +88,10 @@ scrapeData();
 
 // Endpoint to serve the latest scraped data via HTTP
 app.get('/scrape', (req, res) => {
-  res.json(scrapedData);
+  console.log(req);
+  console.log('aaaa');
+  res.json(scrapedDataContainer(...data1, ...data2));
+  
 });
 
 // Handle WebSocket connections
@@ -96,7 +99,7 @@ io.on('connection', (socket) => {
   console.log('A client connected:', socket.id);
   
   // Send the current data to the new client
-  socket.emit('data-update', scrapedData);
+  socket.emit('data-update', scrapedDataContainer(...data1, ...data2));
 
   // Handle disconnection
   socket.on('disconnect', () => {
@@ -106,5 +109,5 @@ io.on('connection', (socket) => {
 
 // Start the server
 server.listen(PORT, () => {
-  // console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
