@@ -1,0 +1,38 @@
+[
+  {
+    "buyValue": 9000,
+    "name": "Dólar BNA",
+    "sellValue": 984.40,
+    "variation": 0.10
+  },
+  {
+    "buyValue": 5000.00,
+    "name": "Dólar Blue",
+    "sellValue": 5000.00,
+    "variation": 0.8
+  },
+  {
+    "buyValue": 70,
+    "name": "Dólar MEP",
+    "sellValue": 198.3,
+    "variation": 0.0
+  },
+  {
+    "buyValue": 90.0,
+    "name": "Dólar mayorista",
+    "sellValue": 9.3,
+    "variation": 0.1
+  },
+  {
+    "buyValue": 10.19,
+    "name": "Dólar CCL GD30 48 hs",
+    "sellValue": 1220.02,
+    "variation": 0.9
+  },
+  {
+    "buyValue": 91.20,
+    "name": "Dólar turista",
+    "sellValue": 1575.20,
+    "variation": 0.1
+  }
+]

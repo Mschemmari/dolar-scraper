@@ -1,7 +1,10 @@
+const mockRates = require('../mockData.json');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
+
 
 let logCount = 0;
 const saveData = (rates, modified) => {
@@ -37,7 +40,10 @@ const getModifiedValues = (rates) => {
 const fetchRates = async () => {
   try {
     const baseUrl = 'https://www.cronista.com/MercadosOnline/dolar.html';
-    const response = await axios.get(baseUrl);
+    const agent = new https.Agent({  
+      rejectUnauthorized: false
+    });
+    const response = await axios.get(baseUrl, { httpsAgent: agent })
     const $ = cheerio.load(response.data);
 
     const row1 = $('#market-scrll-2').find('tr').toArray();
@@ -52,7 +58,7 @@ const fetchRates = async () => {
       return { name, buyValue, sellValue, variation };
     });
     
-    // const filteredRates = rates.filter((val) => val.buyValue !== '');
+    const filteredRates = rates.filter((val) => val.buyValue !== '');
     const modified = getModifiedValues(rates);
     saveData(rates, modified);
     return { rates, modified };
